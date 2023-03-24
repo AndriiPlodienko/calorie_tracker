@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product list</title>
+  </head>
+  <body>
+	<h1>Products</h1>
+    <a href="{% url 'product_create' %}">Add Product</a>
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }} ({{ product.calories }} calories) <a href="{% url 'product_edit' product.pk %}">Edit</a> <a href="{% url 'product_delete' product.pk %}">Delete</a></li>
+        {% empty %}
+            <li>No products.</li>
+        {% endfor %}
+    </ul>
+
+
+    {% block content %}
+    <h2>Products</h2>
+    <ul>
+    {% for product in products %}
+        <li>{{ product.name }} - {{ product.calories }} calories</li>
+    {% empty %}
+        <li>No products found.</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'product_create' %}">Add Product</a>
+    {% endblock %}
+  </body>
+</html>
